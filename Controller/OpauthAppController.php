@@ -18,6 +18,7 @@ class OpauthAppController extends AppController {
 	 * {@inheritDoc}
 	 */
 	public function __construct($request = null, $response = null) {
+        //CakeLog::write(LOG_DEBUG, __CLASS__ . '.' . __FUNCTION__ . '()');
 		parent::__construct($request, $response);
 		
 		$this->autoRender = false;
@@ -27,6 +28,7 @@ class OpauthAppController extends AppController {
 	 * Catch all for Opauth
 	 */
 	public function index(){
+        //CakeLog::write(LOG_DEBUG, __CLASS__ . '.' . __FUNCTION__ . '()');
 		$this->_loadOpauth();
 		$this->Opauth->run();
 		
@@ -37,6 +39,7 @@ class OpauthAppController extends AppController {
 	 * Receives auth response and does validation
 	 */
 	public function callback(){
+        //CakeLog::write(LOG_DEBUG, __CLASS__ . '.' . __FUNCTION__ . '()');
 		$response = null;
 		
 		/**
@@ -126,6 +129,7 @@ class OpauthAppController extends AppController {
 	 * @param boolean $run Whether Opauth should auto run after initialization.
 	 */
 	protected function _loadOpauth($config = null, $run = false){
+        //CakeLog::write(LOG_DEBUG, __CLASS__ . '.' . __FUNCTION__ . '()');
 		// Update dependent config in case the dependency is overwritten at app-level
 		if (Configure::read('Opauth.callback_url') == '/auth/callback') {
 			Configure::write('Opauth.callback_url', Configure::read('Opauth.path').'callback');
@@ -137,5 +141,8 @@ class OpauthAppController extends AppController {
 		
 		App::import('Vendor', 'Opauth.Opauth/lib/Opauth/Opauth');
 		$this->Opauth = new Opauth( $config, $run );
+
+        $this->Session->write('OPAUTH_PERSISTED', $this->Opauth);
+
 	}
 }
