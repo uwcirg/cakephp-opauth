@@ -28,7 +28,9 @@ class OpauthAppController extends AppController {
 	 * Catch all for Opauth
 	 */
 	public function index(){
+        //CakeLog::write(LOG_DEBUG, __CLASS__ . "." . __FUNCTION__ . "() for " . $this->request->params['controller'] . '/' . $this->request->params['action'] . "(); here is request->query: " . print_r($this->request->query, true));
         //CakeLog::write(LOG_DEBUG, __CLASS__ . '.' . __FUNCTION__ . '()');
+
 		$this->_loadOpauth();
 		$this->Opauth->run();
 		
