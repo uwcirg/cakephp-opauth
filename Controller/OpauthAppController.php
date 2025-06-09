@@ -94,7 +94,7 @@ class OpauthAppController extends AppController {
 				);
 				$response['validated'] = false;
 			}
-			elseif (!($this->Opauth->validate(sha1(print_r($response['auth'], true)), $response['timestamp'], $response['signature'], $reason))){
+			elseif (!($this->Opauth->validate(sha1(print_r($response['auth'], true)), $response['timestamp'], $response['signature'], $reason=''))){
 				$response['error'] = array(
 					'provider' => $response['auth']['provider'],
 					'code' => 'invalid_auth_failed_validation',
