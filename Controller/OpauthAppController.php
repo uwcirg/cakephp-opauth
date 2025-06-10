@@ -84,6 +84,7 @@ class OpauthAppController extends AppController {
 		 * is sent through GET or POST.
 		 */
 		else{
+			$reason = '';
 			$this->_loadOpauth();
 			
 			if (empty($response['auth']) || empty($response['timestamp']) || empty($response['signature']) || empty($response['auth']['provider']) || empty($response['auth']['uid'])){
